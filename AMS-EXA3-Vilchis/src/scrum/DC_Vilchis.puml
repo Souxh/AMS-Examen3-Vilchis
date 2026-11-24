@@ -1,0 +1,69 @@
+@startuml
+
+title Tienda Online EcoPaso - Diagrama de Clases
+
+class Usuario {
+    - id: int
+    - nombre: String
+    - correo: String
+    - contrasena: String
+    + registrarse()
+    + iniciarSesion()
+}
+
+class Producto {
+    - id: int
+    - nombre: String
+    - descripcion: String
+    - precio: double
+    - stock: int
+    + consultarStock()
+    + actualizarStock()
+}
+
+class Categoria {
+    - id: int
+    - nombre: String
+    - descripcion: String
+    + listarProductos()
+}
+
+class Carrito {
+    - id: int
+    - total: double
+    + agregarProducto()
+    + eliminarProducto()
+    + calcularTotal()
+}
+
+class DetalleCarrito {
+    - cantidad: int
+    - subtotal: double
+    + calcularSubtotal()
+}
+
+class Pedido {
+    - id: int
+    - fecha: Date
+    - estado: String
+    - total: double
+    + generarPedido()
+    + consultarPedido()
+}
+
+class Pago {
+    - id: int
+    - metodo: String
+    - monto: double
+    - estado: String
+    + procesarPago()
+}
+
+Usuario "1" -- "1" Carrito : tiene
+Usuario "1" -- "0..*" Pedido : realiza
+Categoria "1" -- "0..*" Producto : clasifica
+Carrito "1" *-- "0..*" DetalleCarrito : contiene
+Producto "1" -- "0..*" DetalleCarrito : corresponde
+Pedido "1" *-- "1" Pago : registra
+
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+title EcoPaso - Diagrama de Actividades
+
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #F5F7F0
+    BorderColor #52796F
+    DiamondBackgroundColor #A8B99A
+    DiamondBorderColor #354F45
+    ArrowColor #354F45
+}
+
+start
+
+:Ingresar a la tienda EcoPaso;
+:Mostrar página principal;
+:Consultar catálogo de zapatillas;
+:Seleccionar categoría;
+:Seleccionar producto;
+:Mostrar detalles y precio;
+:Consultar inventario;
+
+if (¿Hay existencias?) then (Sí)
+
+    :Mostrar etiqueta "Disponible";
+    :Seleccionar talla;
+    :Presionar "Comprar ahora";
+    :Agregar producto al carrito;
+    :Consultar carrito;
+    :Calcular total;
+    :Confirmar compra;
+    :Seleccionar método de pago;
+    :Procesar pago;
+
+    if (¿Pago exitoso?) then (Sí)
+        :Generar pedido;
+        :Actualizar inventario;
+        :Mostrar confirmación de compra;
+        :Mostrar número de pedido;
+    else (No)
+        :Mostrar error de pago;
+        :Permitir intentar nuevamente;
+    endif
+
+else (No)
+
+    :Mostrar etiqueta "Agotado";
+    :Deshabilitar botón de compra;
+    :Informar al cliente;
+
+endif
+
+stop
+
+@enduml
